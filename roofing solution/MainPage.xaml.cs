@@ -1,5 +1,4 @@
-﻿using CoreLocation;
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 
 namespace roofing_solution
@@ -7,6 +6,24 @@ namespace roofing_solution
     public partial class MainPage : ContentPage
     {
         public List<double> Heights { get; set; }
+        
+        private List<double> firstList;
+        private List<double> secondList;
+
+        private void OnCalculateClicked(object sender, EventArgs e)
+        {
+            double sk = double.Parse(firstNumberEntry.Text);
+            double vk = double.Parse(secondNumberEntry.Text);
+
+            firstList = new List<double>(getHeights(sk, vk, ""));
+            secondList = new List<double>(getHeights(sk, vk, "two"));
+
+            
+
+            UpdateColumns(firstList, "One");
+            UpdateColumns(secondList, "Two");
+        }
+
 
         private static List<double> getHeights(double sk, double vk, string type)
         {
@@ -28,7 +45,6 @@ namespace roofing_solution
                     sk -= st;
                 }
             }
-
             List<double> hr = new List<double>(h);
             hr.Reverse();
             if (type == "two") { hr.Remove(hr.Last()); }
@@ -41,21 +57,18 @@ namespace roofing_solution
         {
             InitializeComponent();
 
-            // Sample data
-            Heights = new List<double> {};
-
             // Set the data context of the page to itself
             this.BindingContext = this;
-
-            // Call method to update columns
-            UpdateColumns();
         }
 
         // Method to update the columns in the FlexLayout
-        private void UpdateColumns()
+        private void UpdateColumns(List<Double> Heights, string Table)
         {
             // Clear existing columns
-            flexLayout.Children.Clear();
+            if (Table == "One") { flexLayoutOne.Children.Clear(); } else
+            {
+                flexLayoutTwo.Children.Clear();
+            }
 
             // Add new columns based on Heights
             foreach (var height in Heights)
@@ -81,7 +94,11 @@ namespace roofing_solution
                     HorizontalOptions = LayoutOptions.Center
                 };
 
-                flexLayout.Children.Add(columnWithLabel);
+                if(Table == "One") { flexLayoutOne.Children.Add(columnWithLabel); } else
+                {
+                    flexLayoutTwo.Children.Add(columnWithLabel);
+                }
+                
             }
         }
     }

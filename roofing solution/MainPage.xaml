@@ -10,10 +10,19 @@
         <!-- Input for the second number -->
         <Entry x:Name="secondNumberEntry" Placeholder="Sirina krova" Keyboard="Numeric" />
 
+        <Button Text="Izračunaj"
+                Margin="0,20,0,0"
+                Clicked="OnCalculateClicked"/>
+
         <!-- FlexLayout to display columns -->
-        <FlexLayout x:Name="flexLayout" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+        <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
             <!-- Columns will be dynamically added here -->
         </FlexLayout>
+
+        <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+            <!-- Columns will be dynamically added here -->
+        </FlexLayout>
+
     </StackLayout>
 
 </ContentPage>
