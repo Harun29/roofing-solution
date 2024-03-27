@@ -1,0 +1,19 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:roofing_solution.Controls"
+             x:Class="roofing_solution.MainPage">
+
+    <StackLayout Padding="20">
+        <!-- Input for the first number -->
+        <Entry x:Name="firstNumberEntry" Placeholder="Visina krova" Keyboard="Numeric" />
+
+        <!-- Input for the second number -->
+        <Entry x:Name="secondNumberEntry" Placeholder="Sirina krova" Keyboard="Numeric" />
+
+        <!-- FlexLayout to display columns -->
+        <FlexLayout x:Name="flexLayout" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+            <!-- Columns will be dynamically added here -->
+        </FlexLayout>
+    </StackLayout>
+
+</ContentPage>
