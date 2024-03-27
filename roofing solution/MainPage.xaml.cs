@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls;
+﻿using CoreLocation;
+using Microsoft.Maui.Controls;
 using System.Collections.Generic;
 
 namespace roofing_solution
@@ -6,6 +7,28 @@ namespace roofing_solution
     public partial class MainPage : ContentPage
     {
         public List<double> Heights { get; set; }
+
+        private static List<double> getHeights(double sk, double vk)
+        {
+            double st = 2.3;
+            double i = (sk / 2) / st;
+            List<double> h = new List<double> { Math.Round(vk, 3) };
+            for (int n = 0; n < i; n++)
+            {
+                double sv = (2 * vk * (sk / 2 - st)) / sk;
+                h.Add(Math.Round(sv, 3));
+                vk = sv;
+                sk -= st;
+            }
+
+            List<double> hr = new List<double>(h);
+            hr.Reverse();
+            List<double> fl = new List<double>(hr.Concat(h));
+
+            return fl;
+        }
+
+
 
         public MainPage()
         {
