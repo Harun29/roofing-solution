@@ -8,27 +8,34 @@ namespace roofing_solution
     {
         public List<double> Heights { get; set; }
 
-        private static List<double> getHeights(double sk, double vk)
+        private static List<double> getHeights(double sk, double vk, string type)
         {
-            double st = 2.3;
+            double st = 2;
+            if (type == "two") { st = st / 2; }
             double i = (sk / 2) / st;
+            if (type == "two") { i = ((sk / 2) - st) / (st * 2); }
+            i = Math.Floor(i);
             List<double> h = new List<double> { Math.Round(vk, 3) };
             for (int n = 0; n < i; n++)
             {
-                double sv = (2 * vk * (sk / 2 - st)) / sk;
+                double sv = ((2 * vk) * ((sk / 2) - st)) / sk;
                 h.Add(Math.Round(sv, 3));
                 vk = sv;
-                sk -= st;
+                st = 2;
+                if (type == "") { sk -= st * 2; }
+                else
+                {
+                    sk -= st;
+                }
             }
 
             List<double> hr = new List<double>(h);
             hr.Reverse();
+            if (type == "two") { hr.Remove(hr.Last()); }
             List<double> fl = new List<double>(hr.Concat(h));
 
             return fl;
         }
-
-
 
         public MainPage()
         {
