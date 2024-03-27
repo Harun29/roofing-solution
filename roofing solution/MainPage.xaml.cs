@@ -18,8 +18,6 @@ namespace roofing_solution
             firstList = new List<double>(getHeights(sk, vk, ""));
             secondList = new List<double>(getHeights(sk, vk, "two"));
 
-            
-
             UpdateColumns(firstList, "One");
             UpdateColumns(secondList, "Two");
         }
@@ -27,10 +25,10 @@ namespace roofing_solution
 
         private static List<double> getHeights(double sk, double vk, string type)
         {
-            double st = 2;
+            double st = 1.5;
             if (type == "two") { st = st / 2; }
             double i = (sk / 2) / st;
-            if (type == "two") { i = ((sk / 2) - st) / (st * 2); }
+            if (type == "two") { i = ((sk / 2) - st) / (st * 2) + 1; }
             i = Math.Floor(i);
             List<double> h = new List<double> { Math.Round(vk, 3) };
             for (int n = 0; n < i; n++)
@@ -38,7 +36,7 @@ namespace roofing_solution
                 double sv = ((2 * vk) * ((sk / 2) - st)) / sk;
                 h.Add(Math.Round(sv, 3));
                 vk = sv;
-                st = 2;
+                st = 1.5;
                 if (type == "") { sk -= st * 2; }
                 else
                 {
@@ -75,7 +73,7 @@ namespace roofing_solution
             {
                 var column = new BoxView
                 {
-                    BackgroundColor = Color.FromRgb(0, 0, 255), // Customize as needed
+                    BackgroundColor = Colors.BlueViolet, // Customize as needed
                     HeightRequest = height * 20,   // Adjust multiplier as needed for scaling
                     WidthRequest = 40,             // Adjust as needed
                     Margin = new Thickness(2)      // Adjust margin as needed

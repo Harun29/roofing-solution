@@ -5,21 +5,21 @@
 
     <StackLayout Padding="20">
         <!-- Input for the first number -->
-        <Entry x:Name="firstNumberEntry" Placeholder="Visina krova" Keyboard="Numeric" />
+        <Entry x:Name="firstNumberEntry" Placeholder="Širina krova" Keyboard="Numeric" />
 
         <!-- Input for the second number -->
-        <Entry x:Name="secondNumberEntry" Placeholder="Sirina krova" Keyboard="Numeric" />
+        <Entry x:Name="secondNumberEntry" Placeholder="Visina krova" Keyboard="Numeric" />
 
         <Button Text="Izračunaj"
                 Margin="0,20,0,0"
                 Clicked="OnCalculateClicked"/>
 
         <!-- FlexLayout to display columns -->
-        <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+        <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End" Margin="0, 30, 0, 0">
             <!-- Columns will be dynamically added here -->
         </FlexLayout>
 
-        <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+        <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End" Margin="0, 30, 0, 0">
             <!-- Columns will be dynamically added here -->
         </FlexLayout>
 
