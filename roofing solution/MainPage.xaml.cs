@@ -75,7 +75,7 @@ namespace roofing_solution
                 {
                     BackgroundColor = Colors.BlueViolet, // Customize as needed
                     HeightRequest = height * 20,   // Adjust multiplier as needed for scaling
-                    WidthRequest = 40,             // Adjust as needed
+                    WidthRequest = 30,             // Adjust as needed
                     Margin = new Thickness(2)      // Adjust margin as needed
                 };
 
