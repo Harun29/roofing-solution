@@ -43,7 +43,10 @@ namespace roofing_solution
             for (int n = 0; n < i; n++)
             {
                 double sv = ((2 * vk) * ((sk / 2) - st)) / sk;
-                h.Add(Math.Round(sv, 2));
+                if(sv != 0)
+                {
+                    h.Add(Math.Round(sv, 2));
+                }
                 vk = sv;
                 st = 1.5;
                 if (type == "" || (type == "two" && n != 0)) { sk -= st * 2; }
