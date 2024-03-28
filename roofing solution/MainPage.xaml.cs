@@ -22,8 +22,8 @@ namespace roofing_solution
 
             UpdateColumns(firstList, "One");
             UpdateColumns(secondList, "Two");
-            firstLoss.Text = $"otpad na zadnjoj tabli: {lossOne} m2";
-            secondLoss.Text = $"otpad na zadnjoj tabli: {lossTwo} m2";
+            firstLoss.Text = $"Otpad: {lossOne} m2";
+            secondLoss.Text = $"Otpad: {lossTwo} m2";
         }
 
 
@@ -53,6 +53,24 @@ namespace roofing_solution
             List<double> fl = new List<double>(hr.Concat(h));
 
             double loss = calculateLoss(st, fl[0], (i - Math.Floor(i)) * st);
+            foreach (double v in hr)
+            {
+                int index = hr.IndexOf(v);
+                if(index == 0)
+                {
+                    continue;
+                }
+                loss += ((v - hr[index - 1]) * st) / 2;
+            }
+
+            if(type == "two")
+            {
+                loss += ((h[0] - h[1]) * (st / 2)) / 2;
+            }
+
+            loss *= 2;
+            loss = Math.Round(loss, 2);
+
             if (type == "two") { lossTwo = loss.ToString(); }
             else
             {
@@ -99,7 +117,7 @@ namespace roofing_solution
 
                 var heightLabel = new Label
                 {
-                    Text = height.ToString(),
+                    Text = height.ToString() + " ",
                     HorizontalOptions = LayoutOptions.Center
                 };
 
