@@ -8,7 +8,7 @@
     FlyoutBackground="WhiteSmoke">
 
     <ShellContent
-        Title="Roofing Solution"
+        Title="Hare Roofing"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"/>
 
