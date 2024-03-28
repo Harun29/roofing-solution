@@ -9,6 +9,8 @@ namespace roofing_solution
         
         private List<double> firstList;
         private List<double> secondList;
+        private string lossOne;
+        private string lossTwo;
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
@@ -20,10 +22,12 @@ namespace roofing_solution
 
             UpdateColumns(firstList, "One");
             UpdateColumns(secondList, "Two");
+            firstLoss.Text = $"otpad na zadnjoj tabli: {lossOne} m2";
+            secondLoss.Text = $"otpad na zadnjoj tabli: {lossTwo} m2";
         }
 
 
-        private static List<double> getHeights(double sk, double vk, string type)
+        private List<double> getHeights(double sk, double vk, string type)
         {
             double st = 1.5;
             if (type == "two") { st = st / 2; }
@@ -48,7 +52,21 @@ namespace roofing_solution
             if (type == "two") { hr.Remove(hr.Last()); }
             List<double> fl = new List<double>(hr.Concat(h));
 
+            double loss = calculateLoss(st, fl[0], (i - Math.Floor(i)) * st);
+            if (type == "two") { lossTwo = loss.ToString(); }
+            else
+            {
+                lossOne = loss.ToString();
+            }
+
             return fl;
+        }
+
+        private static double calculateLoss(double st, double a, double b)
+        {
+            double loss = (st * a) - (a * b)/2;
+            loss = Math.Round(loss, 3);
+            return loss;
         }
 
         public MainPage()
@@ -73,10 +91,10 @@ namespace roofing_solution
             {
                 var column = new BoxView
                 {
-                    BackgroundColor = Colors.BlueViolet, // Customize as needed
-                    HeightRequest = height * 20,   // Adjust multiplier as needed for scaling
-                    WidthRequest = 30,             // Adjust as needed
-                    Margin = new Thickness(2)      // Adjust margin as needed
+                    BackgroundColor = Colors.BlueViolet,
+                    HeightRequest = height * 20,
+                    WidthRequest = 30,
+                    Margin = new Thickness(2)
                 };
 
                 var heightLabel = new Label

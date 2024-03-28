@@ -18,10 +18,12 @@
         <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End" Margin="0, 30, 0, 0">
             <!-- Columns will be dynamically added here -->
         </FlexLayout>
+        <Label x:Name="firstLoss"></Label>
 
         <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End" Margin="0, 30, 0, 0">
             <!-- Columns will be dynamically added here -->
         </FlexLayout>
+        <Label x:Name="secondLoss"></Label>
 
     </StackLayout>
 
