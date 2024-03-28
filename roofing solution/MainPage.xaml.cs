@@ -34,11 +34,11 @@ namespace roofing_solution
             double i = (sk / 2) / st;
             if (type == "two") { i = ((sk / 2) - st) / (st * 2) + 1; }
             i = Math.Floor(i);
-            List<double> h = new List<double> { Math.Round(vk, 3) };
+            List<double> h = new List<double> { Math.Round(vk, 2) };
             for (int n = 0; n < i; n++)
             {
                 double sv = ((2 * vk) * ((sk / 2) - st)) / sk;
-                h.Add(Math.Round(sv, 3));
+                h.Add(Math.Round(sv, 2));
                 vk = sv;
                 st = 1.5;
                 if (type == "") { sk -= st * 2; }

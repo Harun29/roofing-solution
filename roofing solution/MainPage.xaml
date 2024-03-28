@@ -1,30 +1,79 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:roofing_solution.Controls"
-             x:Class="roofing_solution.MainPage">
+             x:Class="roofing_solution.MainPage"
+             BackgroundColor="White">
 
-    <StackLayout Padding="20">
-        <!-- Input for the first number -->
-        <Entry x:Name="firstNumberEntry" Placeholder="Širina krova" Keyboard="Numeric" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Define styles for labels -->
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="DarkSlateGray" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
 
-        <!-- Input for the second number -->
-        <Entry x:Name="secondNumberEntry" Placeholder="Visina krova" Keyboard="Numeric" />
+            <!-- Define styles for entries -->
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="DarkSlateGray" />
+                <Setter Property="PlaceholderColor" Value="LightGray" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
 
-        <Button Text="Izračunaj"
-                Margin="0,20,0,0"
+            <!-- Define style for the button -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#2E86C1" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="Margin" Value="0,10,0,10" />
+            </Style>
+
+            <!-- Define style for the stack layout -->
+            <Style TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+                <Setter Property="Spacing" Value="15" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <!-- Label and input for the first number -->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Širina krova:" VerticalOptions="Center" />
+                <Entry x:Name="firstNumberEntry" Placeholder="Unesite širinu krova" Keyboard="Numeric" />
+            </StackLayout>
+
+            <!-- Label and input for the second number -->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Visina krova:" VerticalOptions="Center" />
+                <Entry x:Name="secondNumberEntry" Placeholder="Unesite visinu krova" Keyboard="Numeric" />
+            </StackLayout>
+
+            <Button Text="Izračunaj"
                 Clicked="OnCalculateClicked"/>
 
-        <!-- FlexLayout to display columns -->
-        <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End" Margin="0, 30, 0, 0">
-            <!-- Columns will be dynamically added here -->
-        </FlexLayout>
-        <Label x:Name="firstLoss"></Label>
+            <!-- FlexLayout to display columns -->
+            <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+                <!-- Columns will be dynamically added here -->
+            </FlexLayout>
+            <Label x:Name="firstLoss"></Label>
 
-        <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End" Margin="0, 30, 0, 0">
-            <!-- Columns will be dynamically added here -->
-        </FlexLayout>
-        <Label x:Name="secondLoss"></Label>
+            <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+                <!-- Columns will be dynamically added here -->
+            </FlexLayout>
+            <Label x:Name="secondLoss"></Label>
 
-    </StackLayout>
+            <!-- Add some empty space at the end for better scrolling -->
+            <BoxView HeightRequest="50" BackgroundColor="WhiteSmoke" />
+        </StackLayout>
+    </ScrollView>
+
 
 </ContentPage>
