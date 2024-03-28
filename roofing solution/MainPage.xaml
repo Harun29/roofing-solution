@@ -7,6 +7,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <!-- Define styles for labels -->
+            
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="DarkSlateGray" />
                 <Setter Property="FontSize" Value="18" />

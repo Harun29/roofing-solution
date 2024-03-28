@@ -1,15 +1,20 @@
-<Shell
-    x:Class="roofing_solution.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:roofing_solution"
-    Shell.FlyoutBehavior="Disabled"
-    Title="roofing_solution"
-    FlyoutBackground="WhiteSmoke">
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:roofing_solution"
+       x:Class="roofing_solution.AppShell"
+       Title="roofing_solution"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.BackgroundColor="WhiteSmoke">
 
-    <ShellContent
-        Title="Hare Roofing"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage"/>
+    <!-- Customizing Shell Title Area -->
+    <Shell.TitleView>
+        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="0,20,10,10">
+            <!-- Logo -->
+            <Label Text="Hare Roofing" VerticalOptions="Center" FontSize="15" TextColor="Black"/>
+            <Image Source="logo.png" HeightRequest="100" WidthRequest="100" VerticalOptions="Center"/>
+            <!-- Title -->
+        </StackLayout>
+    </Shell.TitleView>
 
+    <ShellContent Title="Hare Roofing" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}"/>
 </Shell>
