@@ -14,6 +14,12 @@ namespace roofing_solution
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(firstNumberEntry.Text) || string.IsNullOrWhiteSpace(secondNumberEntry.Text))
+            {
+                DisplayAlert("Error", "Unesi vrijednost u svoja polja.", "OK");
+                return;
+            }
+
             double sk = double.Parse(firstNumberEntry.Text);
             double vk = double.Parse(secondNumberEntry.Text);
 
@@ -25,6 +31,7 @@ namespace roofing_solution
             firstLoss.Text = $"Otpad: {lossOne} m2";
             secondLoss.Text = $"Otpad: {lossTwo} m2";
         }
+
 
 
         private List<double> getHeights(double sk, double vk, string type)
