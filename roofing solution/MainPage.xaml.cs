@@ -32,8 +32,6 @@ namespace roofing_solution
             secondLoss.Text = $"Otpad: {lossTwo} m2";
         }
 
-
-
         private List<double> getHeights(double sk, double vk, string type)
         {
             double st = 1.5;
@@ -48,8 +46,8 @@ namespace roofing_solution
                 h.Add(Math.Round(sv, 2));
                 vk = sv;
                 st = 1.5;
-                if (type == "") { sk -= st * 2; }
-                else
+                if (type == "" || (type == "two" && n != 0)) { sk -= st * 2; }
+                else if(type == "two" && n == 0)
                 {
                     sk -= st;
                 }
