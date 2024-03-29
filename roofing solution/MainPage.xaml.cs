@@ -33,8 +33,8 @@ namespace roofing_solution
             firstLoss.Text = $"Otpad: {lossOne} m2";
             secondLoss.Text = $"Otpad: {lossTwo} m2";
 
-            sirinaZadnjeJedan.Text = $"Sirina zadnje: {widthOne}";
-            sirinaZadnjeDva.Text = $"Sirina zadnje: {widthTwo}";
+            sirinaZadnjeJedan.Text = $"Širina zadnje: {widthOne}";
+            sirinaZadnjeDva.Text = $"Širina zadnje: {widthTwo}";
         }
 
         private List<double> getHeights(double sk, double vk, string type)
@@ -42,9 +42,12 @@ namespace roofing_solution
             double st = 1.1;
             if (type == "two") { st = st / 2; }
             double i = (sk / 2) / st;
-            if (type == "two") { i = ((sk / 2) - st) / (st * 2) + 1; }
+            if (type == "two") { i = ((sk / 2) - st) / (st * 2);}
+            Console.WriteLine(i);
+            double k = Math.Floor(i);
+            if (type == "two") { k += 1; };
             List<double> h = new List<double> { Math.Round(vk, 2) };
-            for (int n = 0; n < i; n++)
+            for (int n = 0; n < k; n++)
             {
                 double sv = ((2 * vk) * ((sk / 2) - st)) / sk;
                 if(sv != 0)
@@ -65,7 +68,11 @@ namespace roofing_solution
             List<double> fl = new List<double>(hr.Concat(h));
 
             double loss = calculateLoss(st, fl[0], (i - Math.Floor(i)) * st);
-            double width = (i - Math.Floor(i)) * st;
+            double width = Math.Round(((i - Math.Floor(i)) * st), 2);
+            if (width == 0)
+            {
+                width = st;
+            }
             foreach (double v in hr)
             {
                 int index = hr.IndexOf(v);
@@ -84,11 +91,11 @@ namespace roofing_solution
             loss *= 2;
             loss = Math.Round(loss, 2);
 
-            if (type == "two") { lossTwo = loss.ToString(); widthOne = width; }
+            if (type == "two") { lossTwo = loss.ToString(); widthTwo = width; }
             else
             {
                 lossOne = loss.ToString();
-                widthTwo = width;
+                widthOne = width;
             }
 
             return fl;
