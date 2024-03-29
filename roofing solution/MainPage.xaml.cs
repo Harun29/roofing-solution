@@ -11,6 +11,8 @@ namespace roofing_solution
         private List<double> secondList;
         private string lossOne;
         private string lossTwo;
+        private double widthOne;
+        private double widthTwo;
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
@@ -30,15 +32,17 @@ namespace roofing_solution
             UpdateColumns(secondList, "Two");
             firstLoss.Text = $"Otpad: {lossOne} m2";
             secondLoss.Text = $"Otpad: {lossTwo} m2";
+
+            sirinaZadnjeJedan.Text = $"Sirina zadnje: {widthOne}";
+            sirinaZadnjeDva.Text = $"Sirina zadnje: {widthTwo}";
         }
 
         private List<double> getHeights(double sk, double vk, string type)
         {
-            double st = 1.5;
+            double st = 1.1;
             if (type == "two") { st = st / 2; }
             double i = (sk / 2) / st;
             if (type == "two") { i = ((sk / 2) - st) / (st * 2) + 1; }
-            i = Math.Floor(i);
             List<double> h = new List<double> { Math.Round(vk, 2) };
             for (int n = 0; n < i; n++)
             {
@@ -48,7 +52,7 @@ namespace roofing_solution
                     h.Add(Math.Round(sv, 2));
                 }
                 vk = sv;
-                st = 1.5;
+                st = 1.1;
                 if (type == "" || (type == "two" && n != 0)) { sk -= st * 2; }
                 else if(type == "two" && n == 0)
                 {
@@ -61,6 +65,7 @@ namespace roofing_solution
             List<double> fl = new List<double>(hr.Concat(h));
 
             double loss = calculateLoss(st, fl[0], (i - Math.Floor(i)) * st);
+            double width = (i - Math.Floor(i)) * st;
             foreach (double v in hr)
             {
                 int index = hr.IndexOf(v);
@@ -79,10 +84,11 @@ namespace roofing_solution
             loss *= 2;
             loss = Math.Round(loss, 2);
 
-            if (type == "two") { lossTwo = loss.ToString(); }
+            if (type == "two") { lossTwo = loss.ToString(); widthOne = width; }
             else
             {
                 lossOne = loss.ToString();
+                widthTwo = width;
             }
 
             return fl;

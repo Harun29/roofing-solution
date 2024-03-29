@@ -64,11 +64,13 @@
             <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
                 <!-- Columns will be dynamically added here -->
             </FlexLayout>
+            <Label x:Name="sirinaZadnjeJedan"></Label>
             <Label x:Name="firstLoss"></Label>
 
             <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
                 <!-- Columns will be dynamically added here -->
             </FlexLayout>
+            <Label x:Name="sirinaZadnjeDva"></Label>
             <Label x:Name="secondLoss"></Label>
 
             <!-- Add some empty space at the end for better scrolling -->
