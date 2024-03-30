@@ -8,11 +8,8 @@
 
     <!-- Customizing Shell Title Area -->
     <Shell.TitleView>
-        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="0,20,10,10">
-            <!-- Logo -->
-            <Label Text="Hare Roofing" VerticalOptions="Center" FontSize="15" TextColor="Black"/>
-            <Image Source="logo.png" HeightRequest="100" WidthRequest="100" VerticalOptions="Center"/>
-            <!-- Title -->
+        <StackLayout Orientation="Horizontal" BackgroundColor="WhiteSmoke" Padding="0,30,10,10" HorizontalOptions="CenterAndExpand">
+            <Image Source="logo.png" HeightRequest="100" WidthRequest="100" VerticalOptions="CenterAndExpand"/>
         </StackLayout>
     </Shell.TitleView>
 

@@ -39,11 +39,41 @@
                 <Setter Property="Spacing" Value="15" />
             </Style>
 
+            <Style TargetType="Polygon" x:Key="TriangleStyle">
+                <Setter Property="Fill" Value="Black" />
+            </Style>
+
+            <Style TargetType="Picker">
+                <!-- Enhanced visibility with a larger font and bold text -->
+                <Setter Property="FontSize" Value="16"/>
+                <!-- Improved background contrast for better readability -->
+                <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+                <!-- Accent color for the picker title -->
+                <Setter Property="TitleColor" Value="#0078D7"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="WidthRequest" Value="100"/>
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
+
+
     <ScrollView>
         <StackLayout Padding="20">
+
+            <Picker x:Name="picker"
+            Title="Izaberi vrstu">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Standardno</x:String>
+                        <x:String>Pola strane</x:String>
+                        <x:String>Ravan vrh</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
             <!-- Label and input for the first number -->
             <StackLayout Orientation="Horizontal">
                 <Label Text="Širina krova:" VerticalOptions="Center" />
