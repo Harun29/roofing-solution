@@ -107,9 +107,6 @@
                     x:Name="Canvas"                 
                     HorizontalOptions="Fill"
                     HeightRequest="100">
-                    <GraphicsView.Drawable>
-                        <drawable:MainPage />
-                    </GraphicsView.Drawable>
                 </GraphicsView>
 
 

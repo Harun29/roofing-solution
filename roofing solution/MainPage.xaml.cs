@@ -8,21 +8,33 @@ namespace roofing_solution
 {
     public partial class MainPage : ContentPage, IDrawable
     {
-        public List<double> Heights { get; set; }
-        
-        private List<double> firstList;
-        private List<double> secondList;
-        private string lossOne;
-        private string lossTwo;
+        // Non-nullable fields
+        private List<double> firstList = new List<double>();
+        private List<double> secondList = new List<double>();
+        private string lossOne = string.Empty;
+        private string lossTwo = string.Empty;
         private double widthOne;
         private double widthTwo;
 
+        // Non-nullable property
+        public List<double> Heights { get; set; } = new List<double>();
+
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
+            if (canvas == null)
+            {
+                Console.WriteLine("Error: Canvas is null");
+                return;
+            }
+
+            // Set stroke color and size
             canvas.StrokeColor = Colors.Red;
-            canvas.StrokeSize = 6;
+            canvas.StrokeSize = 1;
+
+            // Draw a line on the canvas
             canvas.DrawLine(10, 10, 90, 100);
         }
+
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
@@ -122,9 +134,11 @@ namespace roofing_solution
         {
             InitializeComponent();
 
-            // Set the data context of the page to itself
             this.BindingContext = this;
+
+            Canvas.Drawable = this;
         }
+
 
         // Method to update the columns in the FlexLayout
         private void UpdateColumns(List<Double> Heights, string Table)
