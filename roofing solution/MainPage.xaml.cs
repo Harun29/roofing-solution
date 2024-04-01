@@ -17,7 +17,12 @@ namespace roofing_solution
         private double widthOne;
         private double widthTwo;
 
-        
+        public void Draw(ICanvas canvas, RectF dirtyRect)
+        {
+            canvas.StrokeColor = Colors.Red;
+            canvas.StrokeSize = 6;
+            canvas.DrawLine(10, 10, 90, 100);
+        }
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
@@ -159,13 +164,6 @@ namespace roofing_solution
                     flexLayoutTwo.Children.Add(columnWithLabel);
                 }
             }
-        }
-
-        public void draw(icanvas canvas, rectf dirtyrect)
-        {
-            canvas.strokecolor = colors.red;
-            canvas.strokesize = 6;
-            canvas.drawline(10, 10, 90, 100);
         }
 
     }
