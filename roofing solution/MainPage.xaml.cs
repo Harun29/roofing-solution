@@ -1,9 +1,12 @@
 ﻿using Microsoft.Maui.Controls;
 using System.Collections.Generic;
+using Microsoft.Maui.Graphics;
+using System.Drawing;
+using System.Runtime.CompilerServices;
 
 namespace roofing_solution
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, IDrawable
     {
         public List<double> Heights { get; set; }
         
@@ -13,6 +16,8 @@ namespace roofing_solution
         private string lossTwo;
         private double widthOne;
         private double widthTwo;
+
+        
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
@@ -153,8 +158,15 @@ namespace roofing_solution
                 {
                     flexLayoutTwo.Children.Add(columnWithLabel);
                 }
-                
             }
         }
+
+        public void draw(icanvas canvas, rectf dirtyrect)
+        {
+            canvas.strokecolor = colors.red;
+            canvas.strokesize = 6;
+            canvas.drawline(10, 10, 90, 100);
+        }
+
     }
 }

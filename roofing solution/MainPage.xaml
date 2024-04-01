@@ -1,111 +1,122 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="roofing_solution.MainPage"
-             BackgroundColor="LightGray">
+﻿    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="roofing_solution.MainPage"
+                 xmlns:drawable="clr-namespace:roofing_solution"
+                 BackgroundColor="LightGray">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <!-- Define styles for labels -->
+                <!-- Define styles for labels -->
             
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="DarkSlateGray" />
-                <Setter Property="FontSize" Value="18" />
-            </Style>
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="DarkSlateGray" />
+                    <Setter Property="FontSize" Value="18" />
+                </Style>
 
-            <!-- Define styles for entries -->
-            <Style TargetType="Entry">
-                <Setter Property="TextColor" Value="DarkSlateGray" />
-                <Setter Property="PlaceholderColor" Value="LightGray" />
-                <Setter Property="FontSize" Value="18" />
-                <Setter Property="HeightRequest" Value="40" />
-                <Setter Property="Margin" Value="0,5,0,5" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-            </Style>
+                <!-- Define styles for entries -->
+                <Style TargetType="Entry">
+                    <Setter Property="TextColor" Value="DarkSlateGray" />
+                    <Setter Property="PlaceholderColor" Value="LightGray" />
+                    <Setter Property="FontSize" Value="18" />
+                    <Setter Property="HeightRequest" Value="40" />
+                    <Setter Property="Margin" Value="0,5,0,5" />
+                    <Setter Property="HorizontalTextAlignment" Value="Center" />
+                </Style>
 
-            <!-- Define style for the button -->
-            <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#2E86C1" />
-                <Setter Property="TextColor" Value="WhiteSmoke" />
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Padding" Value="10" />
-                <Setter Property="HeightRequest" Value="50" />
-                <Setter Property="Margin" Value="0,10,0,10" />
-            </Style>
+                <!-- Define style for the button -->
+                <Style TargetType="Button">
+                    <Setter Property="BackgroundColor" Value="#2E86C1" />
+                    <Setter Property="TextColor" Value="WhiteSmoke" />
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="CornerRadius" Value="8" />
+                    <Setter Property="Padding" Value="10" />
+                    <Setter Property="HeightRequest" Value="50" />
+                    <Setter Property="Margin" Value="0,10,0,10" />
+                </Style>
 
-            <!-- Define style for the stack layout -->
-            <Style TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="WhiteSmoke" />
-                <Setter Property="Spacing" Value="15" />
-            </Style>
+                <!-- Define style for the stack layout -->
+                <Style TargetType="StackLayout">
+                    <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+                    <Setter Property="Spacing" Value="15" />
+                </Style>
 
-            <Style TargetType="Polygon" x:Key="TriangleStyle">
-                <Setter Property="Fill" Value="Black" />
-            </Style>
+                <Style TargetType="Polygon" x:Key="TriangleStyle">
+                    <Setter Property="Fill" Value="Black" />
+                </Style>
 
-            <Style TargetType="Picker">
-                <!-- Enhanced visibility with a larger font and bold text -->
-                <Setter Property="FontSize" Value="16"/>
-                <!-- Improved background contrast for better readability -->
-                <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
-                <!-- Accent color for the picker title -->
-                <Setter Property="TitleColor" Value="#0078D7"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="Start" />
-                <Setter Property="WidthRequest" Value="100"/>
-            </Style>
+                <Style TargetType="Picker">
+                    <!-- Enhanced visibility with a larger font and bold text -->
+                    <Setter Property="FontSize" Value="16"/>
+                    <!-- Improved background contrast for better readability -->
+                    <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+                    <!-- Accent color for the picker title -->
+                    <Setter Property="TitleColor" Value="#0078D7"/>
+                    <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                    <Setter Property="HorizontalOptions" Value="Start" />
+                    <Setter Property="WidthRequest" Value="100"/>
+                </Style>
 
-        </ResourceDictionary>
-    </ContentPage.Resources>
+            </ResourceDictionary>
+        </ContentPage.Resources>
 
 
 
-    <ScrollView>
-        <StackLayout Padding="20">
+        <ScrollView>
+            <StackLayout Padding="20">
 
-            <Picker x:Name="picker"
-            Title="Izaberi vrstu">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Standardno</x:String>
-                        <x:String>Pola strane</x:String>
-                        <x:String>Ravan vrh</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+                <Picker x:Name="picker"
+                Title="Izaberi vrstu">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Standardno</x:String>
+                            <x:String>Pola strane</x:String>
+                            <x:String>Ravan vrh</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
 
-            <!-- Label and input for the first number -->
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Širina krova:" VerticalOptions="Center" />
-                <Entry x:Name="firstNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
-            </StackLayout>
+                <!-- Label and input for the first number -->
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Širina krova:" VerticalOptions="Center" />
+                    <Entry x:Name="firstNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
+                </StackLayout>
 
-            <!-- Label and input for the second number -->
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Visina krova:" VerticalOptions="Center" />
-                <Entry x:Name="secondNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
-            </StackLayout>
+                <!-- Label and input for the second number -->
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Visina krova:" VerticalOptions="Center" />
+                    <Entry x:Name="secondNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
+                </StackLayout>
 
-            <Button Text="Izračunaj"
-                Clicked="OnCalculateClicked"/>
+                <Button Text="Izračunaj"
+                    Clicked="OnCalculateClicked"/>
 
-            <!-- FlexLayout to display columns -->
-            <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
-                <!-- Columns will be dynamically added here -->
-            </FlexLayout>
-            <Label x:Name="sirinaZadnjeJedan"></Label>
-            <Label x:Name="firstLoss"></Label>
+                <!-- FlexLayout to display columns -->
+                <FlexLayout x:Name="flexLayoutOne" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+                    <!-- Columns will be dynamically added here -->
+                </FlexLayout>
+                <Label x:Name="sirinaZadnjeJedan"></Label>
+                <Label x:Name="firstLoss"></Label>
 
-            <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
-                <!-- Columns will be dynamically added here -->
-            </FlexLayout>
-            <Label x:Name="sirinaZadnjeDva"></Label>
-            <Label x:Name="secondLoss"></Label>
+                <FlexLayout x:Name="flexLayoutTwo" Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="End">
+                    <!-- Columns will be dynamically added here -->
+                </FlexLayout>
+                <Label x:Name="sirinaZadnjeDva"></Label>
+                <Label x:Name="secondLoss"></Label>
+
+                <GraphicsView 
+                    x:Name="Canvas"                 
+                    HorizontalOptions="Fill"
+                    HeightRequest="100">
+                    <GraphicsView.Drawable>
+                        <drawable:MainPage />
+                    </GraphicsView.Drawable>
+                </GraphicsView>
+
 
             <!-- Add some empty space at the end for better scrolling -->
-            <BoxView HeightRequest="50" BackgroundColor="WhiteSmoke" />
-        </StackLayout>
-    </ScrollView>
+                <BoxView HeightRequest="50" BackgroundColor="WhiteSmoke" />
+            </StackLayout>
+        </ScrollView>
 
 
-</ContentPage>
+    </ContentPage>
