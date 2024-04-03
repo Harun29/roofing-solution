@@ -6,7 +6,42 @@ using System.Runtime.CompilerServices;
 
 namespace roofing_solution
 {
-    public partial class MainPage : ContentPage, IDrawable
+
+    public class CustomDrawable : IDrawable
+    {
+        private readonly List<double> heights;
+
+        public CustomDrawable(List<double> heights)
+        {
+            this.heights = heights;
+        }
+
+        public void Draw(ICanvas canvas, RectF dirtyRect)
+        {
+            if (canvas == null || heights == null || heights.Count == 0)
+                return;
+
+            canvas.StrokeColor = Colors.Red;
+            canvas.StrokeSize = 1;
+
+            // Drawing logic based on heights
+            float x = 10;
+            float width = 30;
+            float margin = 2;
+
+            foreach (var height in heights)
+            {
+                float y = 10;
+                float heightRequest = (float)height * 20;
+
+                canvas.DrawRectangle(x, y, width, heightRequest);
+
+                // Update x position for next rectangle
+                x += width + margin;
+            }
+        }
+    }
+        public partial class MainPage : ContentPage
     {
         // Non-nullable fields
         private List<double> firstList = new List<double>();
@@ -19,22 +54,23 @@ namespace roofing_solution
         // Non-nullable property
         public List<double> Heights { get; set; } = new List<double>();
 
-        public void Draw(ICanvas canvas, RectF dirtyRect)
+        //public void Draw(ICanvas canvas, RectF dirtyRect)
+        //{
+        //    if (canvas == null)
+        //    {
+        //        Console.WriteLine("Error: Canvas is null");
+        //        return;
+        //    }
+        //    // Set stroke color and size
+        //    canvas.StrokeColor = Colors.Red;
+        //    canvas.StrokeSize = 1;
+
+        //    canvas.DrawLine(10, 10, 90, 100);
+        //}
+        private void DrawOnCanvas(GraphicsView canvas, List<double> heights)
         {
-            if (canvas == null)
-            {
-                Console.WriteLine("Error: Canvas is null");
-                return;
-            }
-
-            // Set stroke color and size
-            canvas.StrokeColor = Colors.Red;
-            canvas.StrokeSize = 1;
-
-            // Draw a line on the canvas
-            canvas.DrawLine(10, 10, 90, 100);
+            canvas.Drawable = new CustomDrawable(heights);
         }
-
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
@@ -57,7 +93,12 @@ namespace roofing_solution
 
             sirinaZadnjeJedan.Text = $"Širina zadnje: {widthOne}";
             sirinaZadnjeDva.Text = $"Širina zadnje: {widthTwo}";
+
+            DrawOnCanvas(CanvasOne, firstList);
+            DrawOnCanvas(CanvasTwo, secondList);
+
         }
+
 
         private List<double> getHeights(double sk, double vk, string type)
         {
@@ -135,8 +176,6 @@ namespace roofing_solution
             InitializeComponent();
 
             this.BindingContext = this;
-
-            Canvas.Drawable = this;
         }
 
 

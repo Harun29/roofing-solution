@@ -103,11 +103,21 @@
                 <Label x:Name="sirinaZadnjeDva"></Label>
                 <Label x:Name="secondLoss"></Label>
 
+                
                 <GraphicsView 
-                    x:Name="Canvas"                 
+                    x:Name="CanvasOne"                 
                     HorizontalOptions="Fill"
-                    HeightRequest="100">
+                    HeightRequest="100"
+                    IsVisible="True">
                 </GraphicsView>
+
+                <GraphicsView 
+                    x:Name="CanvasTwo"                 
+                    HorizontalOptions="Fill"
+                    HeightRequest="100"
+                    IsVisible="True">
+                </GraphicsView>
+
 
 
             <!-- Add some empty space at the end for better scrolling -->
