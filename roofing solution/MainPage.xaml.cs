@@ -3,45 +3,70 @@ using System.Collections.Generic;
 using Microsoft.Maui.Graphics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using Microsoft.Maui.Controls.Platform.Compatibility;
 
 namespace roofing_solution
 {
 
     public class CustomDrawable : IDrawable
     {
-        private readonly List<double> heights;
+        private float height;
+        private float width;
+        private float lastWidth;
+        private float panelWidth;
+        private List<double> forCount;
 
-        public CustomDrawable(List<double> heights)
+        public CustomDrawable(double height, double width, double lastWidth, double panelWidth, List<double> forCount)
         {
-            this.heights = heights;
+            this.height = Convert.ToSingle(height);
+            this.width = Convert.ToSingle(width);
+            this.lastWidth = Convert.ToSingle(lastWidth);
+            this.panelWidth = Convert.ToSingle(panelWidth);
+            this.forCount = forCount;
         }
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
-            if (canvas == null || heights == null || heights.Count == 0)
+            if (canvas == null || forCount == null || forCount.Count == 0)
                 return;
 
-            canvas.StrokeColor = Colors.Red;
+            canvas.StrokeColor = Colors.Black;
             canvas.StrokeSize = 1;
 
-            // Drawing logic based on heights
-            float x = 10;
-            float width = 30;
-            float margin = 2;
+            width *= 40;
+            height *= 40;
+            panelWidth *= 40;
 
-            foreach (var height in heights)
+            PathF path = new PathF();
+            path.MoveTo(0, height);
+            path.LineTo(width, height);
+            path.LineTo(width/2, 0);
+            path.Close();
+            canvas.DrawPath(path);
+
+            float followingWidth = lastWidth * 40;
+            int count = 0;
+            foreach (double item in forCount)
             {
-                float y = 10;
-                float heightRequest = (float)height * 20;
-
-                canvas.DrawRectangle(x, y, width, heightRequest);
-
-                // Update x position for next rectangle
-                x += width + margin;
+                canvas.StrokeDashPattern = new float[] { 2, 2 };
+                float lineHeight = Convert.ToSingle(item) * 40;
+                if(lineHeight == height && count == 0)
+                {   
+                    count++;
+                    continue;
+                }else if(lineHeight == height && count == 1)
+                {
+                    canvas.DrawLine(followingWidth, height, followingWidth, 0);
+                    followingWidth += panelWidth;
+                    continue;
+                }
+                canvas.DrawLine(followingWidth, height, followingWidth, height - lineHeight);
+                followingWidth += panelWidth;
             }
         }
     }
-        public partial class MainPage : ContentPage
+
+    public partial class MainPage : ContentPage
     {
         // Non-nullable fields
         private List<double> firstList = new List<double>();
@@ -52,24 +77,11 @@ namespace roofing_solution
         private double widthTwo;
 
         // Non-nullable property
-        public List<double> Heights { get; set; } = new List<double>();
+        //public List<double> Heights { get; set; } = new List<double>();
 
-        //public void Draw(ICanvas canvas, RectF dirtyRect)
-        //{
-        //    if (canvas == null)
-        //    {
-        //        Console.WriteLine("Error: Canvas is null");
-        //        return;
-        //    }
-        //    // Set stroke color and size
-        //    canvas.StrokeColor = Colors.Red;
-        //    canvas.StrokeSize = 1;
-
-        //    canvas.DrawLine(10, 10, 90, 100);
-        //}
-        private void DrawOnCanvas(GraphicsView canvas, List<double> heights)
+        private void DrawOnCanvas(GraphicsView canvas, double Height, double Width, double LastWidth, double PanelWidth, List<double> List)
         {
-            canvas.Drawable = new CustomDrawable(heights);
+            canvas.Drawable = new CustomDrawable(Height, Width, LastWidth, PanelWidth, List);
         }
 
         private void OnCalculateClicked(object sender, EventArgs e)
@@ -91,18 +103,37 @@ namespace roofing_solution
             firstLoss.Text = $"Otpad: {lossOne} m2";
             secondLoss.Text = $"Otpad: {lossTwo} m2";
 
+            saSredine.Text = "Sa sredine";
+            naStrane.Text = "Na strane";
+
             sirinaZadnjeJedan.Text = $"Širina zadnje: {widthOne}";
             sirinaZadnjeDva.Text = $"Širina zadnje: {widthTwo}";
 
-            DrawOnCanvas(CanvasOne, firstList);
-            DrawOnCanvas(CanvasTwo, secondList);
+            CanvasTwo.HeightRequest = vk*40;
+            CanvasOne.HeightRequest = vk*40;
+            CanvasTwo.WidthRequest = sk * 40;
+            CanvasOne.WidthRequest = sk * 40;
+            DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList);
+            DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList);
+
+            if(double.Parse(lossOne) > double.Parse(lossTwo))
+            {
+                firstLoss.TextColor = Colors.Red;
+                secondLoss.TextColor = Colors.Green;
+            }
+            else
+            {
+                secondLoss.TextColor = Colors.Red;
+                firstLoss.TextColor = Colors.Green;
+            }
 
         }
+
+        private double st = 1.1;
 
 
         private List<double> getHeights(double sk, double vk, string type)
         {
-            double st = 1.1;
             if (type == "two") { st = st / 2; }
             double i = (sk / 2) / st;
             if (type == "two") { i = ((sk / 2) - st) / (st * 2);}
@@ -194,8 +225,8 @@ namespace roofing_solution
                 var column = new BoxView
                 {
                     BackgroundColor = Colors.BlueViolet,
-                    HeightRequest = height * 20,
-                    WidthRequest = 30,
+                    HeightRequest = height * 40,
+                    WidthRequest = 40,
                     Margin = new Thickness(2)
                 };
 
