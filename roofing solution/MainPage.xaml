@@ -2,7 +2,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                  x:Class="roofing_solution.MainPage"
                  xmlns:drawable="clr-namespace:roofing_solution"
-                 BackgroundColor="LightGray">
+                 BackgroundImageSource="background.jpg">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -35,9 +35,8 @@
                 </Style>
 
                 <!-- Define style for the stack layout -->
-                <Style TargetType="StackLayout">
-                    <Setter Property="BackgroundColor" Value="WhiteSmoke" />
-                    <Setter Property="Spacing" Value="15" />
+            <Style TargetType="StackLayout">
+                <Setter Property="Spacing" Value="15" />
                 </Style>
 
                 <Style TargetType="Polygon" x:Key="TriangleStyle">
@@ -46,10 +45,8 @@
 
                 <Style TargetType="Picker">
                     <!-- Enhanced visibility with a larger font and bold text -->
-                    <Setter Property="FontSize" Value="16"/>
-                    <!-- Improved background contrast for better readability -->
-                    <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
-                    <!-- Accent color for the picker title -->
+                <Setter Property="FontSize" Value="16"/>
+                <!-- Accent color for the picker title -->
                     <Setter Property="TitleColor" Value="#0078D7"/>
                     <Setter Property="HorizontalTextAlignment" Value="Center"/>
                     <Setter Property="HorizontalOptions" Value="Start" />
@@ -109,7 +106,7 @@
             </FlexLayout>
 
             <!-- FlexLayout to contain the second GraphicsView -->
-            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
+            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" >
                 <GraphicsView x:Name="CanvasTwo" Margin="0, 0, 0, 5">
                     <!-- Add your graphic content here -->
                 </GraphicsView>
@@ -118,7 +115,7 @@
             </FlexLayout>
 
             <!-- Add some empty space at the end for better scrolling -->
-            <BoxView HeightRequest="50" BackgroundColor="WhiteSmoke" />
+            <BoxView HeightRequest="150" BackgroundColor="Transparent" />
         </StackLayout>
     </ScrollView>
 
