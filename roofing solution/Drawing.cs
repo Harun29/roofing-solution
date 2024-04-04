@@ -9,22 +9,13 @@ using Microsoft.Maui.Controls.Platform.Compatibility;
 
 namespace roofing_solution
 {
-    public class CustomDrawable : IDrawable
+    public class CustomDrawable(double height, double width, double lastWidth, double panelWidth, List<double> forCount, double cutOutWidth) : IDrawable
     {
-        private float height;
-        private float width;
-        private float lastWidth;
-        private float panelWidth;
-        private List<double> forCount;
-
-        public CustomDrawable(double height, double width, double lastWidth, double panelWidth, List<double> forCount)
-        {
-            this.height = Convert.ToSingle(height);
-            this.width = Convert.ToSingle(width);
-            this.lastWidth = Convert.ToSingle(lastWidth);
-            this.panelWidth = Convert.ToSingle(panelWidth);
-            this.forCount = forCount;
-        }
+        private float height = Convert.ToSingle(height);
+        private float width = Convert.ToSingle(width);
+        private float lastWidth = Convert.ToSingle(lastWidth);
+        private float panelWidth = Convert.ToSingle(panelWidth);
+        private List<double> forCount = forCount;
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {

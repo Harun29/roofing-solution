@@ -28,7 +28,6 @@ namespace roofing_solution
                 roofType = selectedValue;
                 if (selectedValue == "Ravan vrh")
                 {
-                    Console.WriteLine("im here");
                     additionalEntryField.IsVisible = true;
                 }
                 else
@@ -45,14 +44,14 @@ namespace roofing_solution
         // Non-nullable property
         //public List<double> Heights { get; set; } = new List<double>();
 
-        private void DrawOnCanvas(GraphicsView canvas, double Height, double Width, double LastWidth, double PanelWidth, List<double> List)
+        private void DrawOnCanvas(GraphicsView canvas, double Height, double Width, double LastWidth, double PanelWidth, List<double> List, double cutOutWidth)
         {
-            canvas.Drawable = new CustomDrawable(Height, Width, LastWidth, PanelWidth, List);
+            canvas.Drawable = new CustomDrawable(Height, Width, LastWidth, PanelWidth, List, cutOutWidth);
         }
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(firstNumberEntry.Text) || string.IsNullOrWhiteSpace(secondNumberEntry.Text))
+            if (string.IsNullOrWhiteSpace(firstNumberEntry.Text) || string.IsNullOrWhiteSpace(secondNumberEntry.Text) || string.IsNullOrWhiteSpace(thirdNumberEntry.Text))
             {
                 DisplayAlert("Error", "Unesi vrijednost u svoja polja.", "OK");
                 return;
@@ -60,9 +59,10 @@ namespace roofing_solution
 
             double sk = double.Parse(firstNumberEntry.Text);
             double vk = double.Parse(secondNumberEntry.Text);
+            double si = double.Parse(thirdNumberEntry.Text);
 
-            firstList = new List<double>(getHeights(sk, vk, ""));
-            secondList = new List<double>(getHeights(sk, vk, "two"));
+            firstList = new List<double>(GetHeights(sk, vk, "", si));
+            secondList = new List<double>(GetHeights(sk, vk, "two", si));
 
             UpdateColumns(firstList, "One");
             UpdateColumns(secondList, "Two");
@@ -79,8 +79,8 @@ namespace roofing_solution
             CanvasOne.HeightRequest = vk*40;
             CanvasTwo.WidthRequest = sk * 40;
             CanvasOne.WidthRequest = sk * 40;
-            DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList);
-            DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList);
+            DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, 0.0);
+            DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, 0.0);
 
             if(double.Parse(lossOne) > double.Parse(lossTwo))
             {
@@ -98,12 +98,18 @@ namespace roofing_solution
         private double st = 1.1;
 
 
-        private List<double> getHeights(double sk, double vk, string type)
+        private List<double> GetHeights(double sk, double vk, string type, double si)
         {
+            double originalHeigh = vk;
+            double originalWidth = sk;
+            if (roofType == "Ravan vrh")
+            {
+                vk += (vk * si) / (sk - si);
+            }
+
             if (type == "two") { st = st / 2; }
             double i = (sk / 2) / st;
             if (type == "two") { i = ((sk / 2) - st) / (st * 2);}
-            Console.WriteLine(i);
             double k = Math.Floor(i);
             if (type == "two") { k += 1; };
             List<double> h = new List<double> { Math.Round(vk, 2) };
@@ -121,13 +127,26 @@ namespace roofing_solution
                 {
                     sk -= st;
                 }
+                Console.WriteLine("aaaa: "+ h);
+            }
+            if (roofType == "Ravan vrh")
+            {
+                h[0] -= Math.Round(((originalHeigh * si) / (originalWidth - si)), 2);
+                Console.WriteLine(h[0] + " " + h[1]+ " "+ h[2]);
+                for (int index = 1; index <= h.Count - 1 ; index++)
+                {
+                    if (h[index] > h[index - 1])
+                    {
+                        h[index] = h[index - 1];
+                    }
+                }
             }
             List<double> hr = new List<double>(h);
             hr.Reverse();
             if (type == "two") { hr.Remove(hr.Last()); }
             List<double> fl = new List<double>(hr.Concat(h));
 
-            double loss = calculateLoss(st, fl[0], (i - Math.Floor(i)) * st);
+            double loss = CalculateLoss(st, fl[0], (i - Math.Floor(i)) * st);
             double width = Math.Round(((i - Math.Floor(i)) * st), 2);
             if (width == 0)
             {
@@ -161,7 +180,7 @@ namespace roofing_solution
             return fl;
         }
 
-        private static double calculateLoss(double st, double a, double b)
+        private static double CalculateLoss(double st, double a, double b)
         {
             double loss = (st * a) - (a * b)/2;
             loss = Math.Round(loss, 3);
