@@ -17,7 +17,7 @@ namespace roofing_solution
         private string lossTwo = string.Empty;
         private double widthOne;
         private double widthTwo;
-        private string roofType;
+        private string roofType = "Standardno";
 
         private void CheckSelectedPickerItem()
         {
@@ -77,10 +77,18 @@ namespace roofing_solution
 
             CanvasTwo.HeightRequest = vk*40;
             CanvasOne.HeightRequest = vk*40;
-            CanvasTwo.WidthRequest = sk * 40;
-            CanvasOne.WidthRequest = sk * 40;
-            DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, 0.0);
-            DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, 0.0);
+            CanvasTwo.WidthRequest = sk*40;
+            CanvasOne.WidthRequest = sk*40;
+
+            if(roofType == "Standardno")
+            {
+                DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, 0.0);
+                DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, 0.0);
+            }else if(roofType == "Ravan vrh")
+            {
+                DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, si);
+                DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, si);
+            }
 
             if(double.Parse(lossOne) > double.Parse(lossTwo))
             {
