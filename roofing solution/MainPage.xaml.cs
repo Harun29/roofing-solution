@@ -51,7 +51,7 @@ namespace roofing_solution
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(firstNumberEntry.Text) || string.IsNullOrWhiteSpace(secondNumberEntry.Text) || string.IsNullOrWhiteSpace(thirdNumberEntry.Text))
+            if (string.IsNullOrWhiteSpace(firstNumberEntry.Text) || string.IsNullOrWhiteSpace(secondNumberEntry.Text) || (roofType == "Ravan vrh" && string.IsNullOrWhiteSpace(thirdNumberEntry.Text)))
             {
                 DisplayAlert("Error", "Unesi vrijednost u svoja polja.", "OK");
                 return;
@@ -59,7 +59,11 @@ namespace roofing_solution
 
             double sk = double.Parse(firstNumberEntry.Text);
             double vk = double.Parse(secondNumberEntry.Text);
-            double si = double.Parse(thirdNumberEntry.Text);
+            double si = 0.0;
+            if(roofType == "Ravan vrh")
+            {
+                si = double.Parse(thirdNumberEntry.Text);
+            }
 
             firstList = new List<double>(GetHeights(sk, vk, "", si));
             secondList = new List<double>(GetHeights(sk, vk, "two", si));
@@ -80,15 +84,8 @@ namespace roofing_solution
             CanvasTwo.WidthRequest = sk*40;
             CanvasOne.WidthRequest = sk*40;
 
-            if(roofType == "Standardno")
-            {
-                DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, 0.0);
-                DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, 0.0);
-            }else if(roofType == "Ravan vrh")
-            {
-                DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, si);
-                DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, si);
-            }
+            DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, si);
+            DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, si);
 
             if(double.Parse(lossOne) > double.Parse(lossTwo))
             {

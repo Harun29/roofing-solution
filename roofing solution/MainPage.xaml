@@ -59,7 +59,7 @@
 
 
     <ScrollView>
-        <StackLayout Padding="20">
+        <StackLayout BackgroundColor="#88FFFFFF" Padding="20">
             <Picker x:Name="picker" Title="Izaberi vrstu">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
@@ -111,7 +111,7 @@
             </FlexLayout>
 
             <!-- FlexLayout to contain the second GraphicsView -->
-            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center" >
+            <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
                 <GraphicsView x:Name="CanvasTwo" Margin="0, 0, 0, 5">
                     <!-- Add your graphic content here -->
                 </GraphicsView>

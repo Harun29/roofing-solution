@@ -24,7 +24,7 @@ namespace roofing_solution
                 return;
 
             canvas.StrokeColor = Colors.Black;
-            canvas.StrokeSize = 1;
+            canvas.StrokeSize = 2;
 
             width *= 40;
             height *= 40;
