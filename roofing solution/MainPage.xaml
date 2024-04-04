@@ -64,7 +64,7 @@
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Standardno</x:String>
-                        <x:String>Pola strane</x:String>
+                        <!--<x:String>Pola strane</x:String>-->
                         <x:String>Ravan vrh</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
@@ -80,6 +80,11 @@
             <StackLayout Orientation="Horizontal">
                 <Label Text="Visina krova:" VerticalOptions="Center" />
                 <Entry x:Name="secondNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" x:Name="additionalEntryField" IsVisible="False">
+                <Label Text="Sirina isjecka na vrhu:" VerticalOptions="Center" />
+                <Entry x:Name="thirdNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
             </StackLayout>
 
             <Button Text="Izračunaj" Clicked="OnCalculateClicked" />
