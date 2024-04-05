@@ -13,10 +13,10 @@ namespace roofing_solution
     {
         private float height = Convert.ToSingle(height);
         private float width = Convert.ToSingle(width);
-        private float lastWidth = Convert.ToSingle(lastWidth);
+        private readonly float lastWidth = Convert.ToSingle(lastWidth);
         private float panelWidth = Convert.ToSingle(panelWidth);
         private float cutOutWidth = Convert.ToSingle(cutOutWidth);
-        private List<double> forCount = forCount;
+        private readonly List<double> forCount = forCount;
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
@@ -31,7 +31,7 @@ namespace roofing_solution
             panelWidth *= 40;
             cutOutWidth *= 40;
 
-            PathF path = new PathF();
+            PathF path = new();
                 path.MoveTo(0, height);
                 path.LineTo(width, height);
             if(cutOutWidth == 0)
@@ -52,7 +52,7 @@ namespace roofing_solution
 
             foreach (double item in forCount)
             {
-                canvas.StrokeDashPattern = new float[] { 2, 2 };
+                canvas.StrokeDashPattern = [2, 2];
                 float lineHeight = Convert.ToSingle(item) * 40;
                 if (lineHeight == height && count == 0)
                 {

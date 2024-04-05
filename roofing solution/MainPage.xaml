@@ -60,7 +60,7 @@
 
     <ScrollView>
         <StackLayout BackgroundColor="#88FFFFFF" Padding="20">
-            <Picker x:Name="picker" Title="Izaberi vrstu">
+            <Picker TextColor="Black" x:Name="picker" Title="Izaberi vrstu">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Standardno</x:String>
@@ -71,23 +71,25 @@
             </Picker>
 
             <!-- Label and input for the first number -->
-            <StackLayout Orientation="Horizontal">
+            <FlexLayout JustifyContent="SpaceBetween">
                 <Label Text="Širina krova:" VerticalOptions="Center" />
                 <Entry x:Name="firstNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
-            </StackLayout>
+            </FlexLayout>
 
             <!-- Label and input for the second number -->
-            <StackLayout Orientation="Horizontal">
+            <FlexLayout JustifyContent="SpaceBetween">
                 <Label Text="Visina krova:" VerticalOptions="Center" />
                 <Entry x:Name="secondNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
-            </StackLayout>
+            </FlexLayout>
 
-            <StackLayout Orientation="Horizontal" x:Name="additionalEntryField" IsVisible="False">
-                <Label Text="Sirina isjecka na vrhu:" VerticalOptions="Center" />
+            <FlexLayout JustifyContent="SpaceBetween" x:Name="additionalEntryField" IsVisible="False">
+                <Label Text="Širina isječka na vrhu:" VerticalOptions="Center" />
                 <Entry x:Name="thirdNumberEntry" Placeholder="u metrima (m)" Keyboard="Numeric" />
-            </StackLayout>
+            </FlexLayout>
 
             <Button Text="Izračunaj" Clicked="OnCalculateClicked" />
+
+            <Label x:Name="povrsina"></Label>
 
             <Label x:Name="naStrane" FontAttributes="Bold"></Label>
             <!-- FlexLayoutOne to display columns -->
