@@ -18,6 +18,8 @@ namespace roofing_solution
         private double widthOne;
         private double widthTwo;
         private string roofType = "Standardno";
+        private double area;
+        private double st = 1.1;
 
         private void CheckSelectedPickerItem()
         {
@@ -61,7 +63,7 @@ namespace roofing_solution
             {
                 si = double.Parse(thirdNumberEntry.Text);
             }
-            double area = ((sk * (vk + ((vk * si) / (sk - si)))) / 2) - (si*((vk * si) / (sk - si)))/2;
+            area = ((sk * (vk + ((vk * si) / (sk - si)))) / 2) - (si*((vk * si) / (sk - si)))/2;
             area = Math.Round(area,2);
             povrsina.Text = $"Površina krova: {area} m2";
 
@@ -99,8 +101,6 @@ namespace roofing_solution
             }
 
         }
-
-        private double st = 1.1;
 
 
         private List<double> GetHeights(double sk, double vk, string type, double si)
@@ -150,28 +150,12 @@ namespace roofing_solution
             if (type == "two") { hr.Remove(hr.Last()); }
             List<double> fl = new(hr.Concat(h));
 
-            double loss = CalculateLoss(st, fl[0], (i - Math.Floor(i)) * st);
             double width = Math.Round(((i - Math.Floor(i)) * st), 2);
             if (width == 0)
             {
                 width = st;
             }
-            foreach (double v in hr)
-            {
-                int index = hr.IndexOf(v);
-                if(index == 0)
-                {
-                    continue;
-                }
-                loss += ((v - hr[index - 1]) * st) / 2;
-            }
-
-            if(type == "two")
-            {
-                loss += ((h[0] - h[1]) * (st / 2)) / 2;
-            }
-
-            loss *= 2;
+            double loss = CalculateLoss(fl, st, area);
             loss = Math.Round(loss, 2);
 
             if (type == "two") { lossTwo = loss.ToString(); widthTwo = width; }
@@ -184,11 +168,14 @@ namespace roofing_solution
             return fl;
         }
 
-        private static double CalculateLoss(double st, double a, double b)
+        private static double CalculateLoss(List<double> list, double panelWidth, double roofArea)
         {
-            double loss = (st * a) - (a * b)/2;
-            loss = Math.Round(loss, 3);
-            return loss;
+            double areaOfPanels = 0;
+            foreach(double height in list)
+            {
+                areaOfPanels += height * panelWidth;
+            }
+            return areaOfPanels - roofArea;
         }
 
         public MainPage()
