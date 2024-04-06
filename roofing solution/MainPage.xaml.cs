@@ -155,6 +155,8 @@ namespace roofing_solution
             {
                 width = st;
             }
+
+
             double loss = CalculateLoss(fl, st, area);
             loss = Math.Round(loss, 2);
 
@@ -204,7 +206,7 @@ namespace roofing_solution
                 {
                     BackgroundColor = Colors.BlueViolet,
                     HeightRequest = height * 40,
-                    WidthRequest = 40,
+                    WidthRequest = 20,
                     Margin = new Thickness(2)
                 };
 

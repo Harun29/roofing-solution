@@ -8,58 +8,58 @@
         <ResourceDictionary>
                 <!-- Define styles for labels -->
             
-                <Style TargetType="Label">
-                    <Setter Property="TextColor" Value="DarkSlateGray" />
-                    <Setter Property="FontSize" Value="18" />
-                </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="DarkSlateGray" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
 
-                <!-- Define styles for entries -->
-                <Style TargetType="Entry">
-                    <Setter Property="TextColor" Value="DarkSlateGray" />
-                    <Setter Property="PlaceholderColor" Value="LightGray" />
-                    <Setter Property="FontSize" Value="18" />
-                    <Setter Property="HeightRequest" Value="40" />
-                    <Setter Property="Margin" Value="0,5,0,5" />
-                    <Setter Property="HorizontalTextAlignment" Value="Center" />
-                </Style>
+            <!-- Define styles for entries -->
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="DarkSlateGray" />
+                <Setter Property="PlaceholderColor" Value="LightGray" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
 
-                <!-- Define style for the button -->
-                <Style TargetType="Button">
-                    <Setter Property="BackgroundColor" Value="#2E86C1" />
-                    <Setter Property="TextColor" Value="WhiteSmoke" />
-                    <Setter Property="FontSize" Value="20" />
-                    <Setter Property="CornerRadius" Value="8" />
-                    <Setter Property="Padding" Value="10" />
-                    <Setter Property="HeightRequest" Value="50" />
-                    <Setter Property="Margin" Value="0,10,0,10" />
-                </Style>
+            <!-- Define style for the button -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#2E86C1" />
+                <Setter Property="TextColor" Value="WhiteSmoke" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="Margin" Value="0,10,0,10" />
+            </Style>
 
-                <!-- Define style for the stack layout -->
+            <!-- Define style for the stack layout -->
             <Style TargetType="StackLayout">
-                <Setter Property="Spacing" Value="15" />
-                </Style>
+            <Setter Property="Spacing" Value="15" />
+            </Style>
 
-                <Style TargetType="Polygon" x:Key="TriangleStyle">
-                    <Setter Property="Fill" Value="Black" />
-                </Style>
+            <Style TargetType="Polygon" x:Key="TriangleStyle">
+                <Setter Property="Fill" Value="Black" />
+            </Style>
 
-                <Style TargetType="Picker">
-                    <!-- Enhanced visibility with a larger font and bold text -->
+            <Style TargetType="Picker">
+                <!-- Enhanced visibility with a larger font and bold text -->
                 <Setter Property="FontSize" Value="16"/>
                 <!-- Accent color for the picker title -->
-                    <Setter Property="TitleColor" Value="#0078D7"/>
-                    <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                    <Setter Property="HorizontalOptions" Value="Start" />
-                    <Setter Property="WidthRequest" Value="100"/>
-                </Style>
+                <Setter Property="TitleColor" Value="#0078D7"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="WidthRequest" Value="100"/>
+            </Style>
 
-            </ResourceDictionary>
+        </ResourceDictionary>
         </ContentPage.Resources>
 
 
 
     <ScrollView>
-        <StackLayout BackgroundColor="#88FFFFFF" Padding="20">
+        <StackLayout BackgroundColor="#88FFFFFF" Padding="20" >
             <Picker TextColor="Black" x:Name="picker" Title="Izaberi vrstu">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
