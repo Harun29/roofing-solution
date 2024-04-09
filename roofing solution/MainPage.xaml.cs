@@ -4,6 +4,7 @@ using Microsoft.Maui.Graphics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls.Platform.Compatibility;
+using System.Xml.Linq;
 
 namespace roofing_solution
 {
@@ -20,6 +21,15 @@ namespace roofing_solution
         private string roofType = "Standardno";
         private double area;
         private double st = 1.1;
+        private double scale = 1.0;
+
+        private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Console.WriteLine(e.NewValue);
+            scale = e.NewValue;
+            UpdateColumns(firstList, "One");
+            UpdateColumns(secondList, "Two");
+        }
 
         private void CheckSelectedPickerItem()
         {
@@ -43,13 +53,15 @@ namespace roofing_solution
             }
         }
 
-        private void DrawOnCanvas(GraphicsView canvas, double Height, double Width, double LastWidth, double PanelWidth, List<double> List, double cutOutWidth)
+        private static void DrawOnCanvas(GraphicsView canvas, double Height, double Width, double LastWidth, double PanelWidth, List<double> List, double cutOutWidth)
         {
             canvas.Drawable = new CustomDrawable(Height, Width, LastWidth, PanelWidth, List, cutOutWidth);
         }
 
         private void OnCalculateClicked(object sender, EventArgs e)
         {
+            scaleStepperBox.IsVisible = true;
+
             if (string.IsNullOrWhiteSpace(firstNumberEntry.Text) || string.IsNullOrWhiteSpace(secondNumberEntry.Text) || (roofType == "Ravan vrh" && string.IsNullOrWhiteSpace(thirdNumberEntry.Text)))
             {
                 DisplayAlert("Error", "Unesi vrijednost u svoja polja.", "OK");
@@ -86,8 +98,8 @@ namespace roofing_solution
             CanvasTwo.WidthRequest = sk*40;
             CanvasOne.WidthRequest = sk*40;
 
-            DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, si);
-            DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, si);
+            MainPage.DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, si);
+            MainPage.DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, si);
 
             if(double.Parse(lossOne) > double.Parse(lossTwo))
             {
@@ -187,6 +199,8 @@ namespace roofing_solution
             this.BindingContext = this;
 
             picker.SelectedIndexChanged += (s, e) => CheckSelectedPickerItem();
+
+            scaleStepper.ValueChanged += Stepper_ValueChanged;
         }
 
 
@@ -206,24 +220,25 @@ namespace roofing_solution
                 {
                     BackgroundColor = Colors.BlueViolet,
                     HeightRequest = height * 40,
-                    WidthRequest = 20,
-                    Margin = new Thickness(2)
+                    WidthRequest = scale * 40,
+                    Margin = new Thickness(2),
                 };
 
                 var heightLabel = new Label
                 {
                     Text = height.ToString() + " ",
-                    HorizontalOptions = LayoutOptions.Center
+                    HorizontalOptions = LayoutOptions.Center,
+                    FontSize = 18 * scale,
                 };
 
                 var columnWithLabel = new StackLayout
                 {
                     Children = { column, heightLabel },
                     VerticalOptions = LayoutOptions.End,
-                    HorizontalOptions = LayoutOptions.Center
+                    HorizontalOptions = LayoutOptions.Center,
                 };
 
-                if(Table == "One") { flexLayoutOne.Children.Add(columnWithLabel); } else
+                if(Table == "One") { flexLayoutOne.Children.Add(columnWithLabel);} else
                 {
                     flexLayoutTwo.Children.Add(columnWithLabel);
                 }

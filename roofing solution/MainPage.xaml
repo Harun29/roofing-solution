@@ -53,6 +53,11 @@
                 <Setter Property="WidthRequest" Value="100"/>
             </Style>
 
+            <Style TargetType="Stepper">
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="HeightRequest" Value="40" />
+            </Style>
+
         </ResourceDictionary>
         </ContentPage.Resources>
 
@@ -88,6 +93,11 @@
             </FlexLayout>
 
             <Button Text="Izračunaj" Clicked="OnCalculateClicked" />
+
+            <FlexLayout x:Name="scaleStepperBox" IsVisible="False">
+                <Label Text="Zoom: " VerticalOptions="Center"></Label>
+                <Stepper x:Name="scaleStepper" Minimum="0.5" Value="1" Maximum="1.5" Increment="0.1" ValueChanged="Stepper_ValueChanged"/>
+            </FlexLayout>
 
             <Label x:Name="povrsina"></Label>
 
