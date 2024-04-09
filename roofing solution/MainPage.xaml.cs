@@ -52,6 +52,7 @@ namespace roofing_solution
                 }
                 else
                 {
+                    si = 0.0;
                     additionalEntryField.IsVisible = false;
                 }
             }
