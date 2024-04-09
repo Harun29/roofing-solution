@@ -109,7 +109,7 @@
 
             <!-- FlexLayout to contain the first GraphicsView -->
             <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
-                <GraphicsView x:Name="CanvasOne" Margin="0, 0, 0, 5">
+                <GraphicsView HorizontalOptions="Center" VerticalOptions="Center" x:Name="CanvasOne" Margin="0, 0, 0, 5">
                     <!-- Add your graphic content here -->
                 </GraphicsView>
                 <Label x:Name="sirinaZadnjeJedan"></Label>

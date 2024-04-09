@@ -25,7 +25,6 @@ namespace roofing_solution
 
         private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            Console.WriteLine(e.NewValue);
             scale = e.NewValue;
             UpdateColumns(firstList, "One");
             UpdateColumns(secondList, "Two");

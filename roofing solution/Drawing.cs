@@ -11,6 +11,7 @@ namespace roofing_solution
 {
     public class CustomDrawable(double height, double width, double lastWidth, double panelWidth, List<double> forCount, double cutOutWidth) : IDrawable
     {
+        private float scale = 1;
         private float height = Convert.ToSingle(height);
         private float width = Convert.ToSingle(width);
         private readonly float lastWidth = Convert.ToSingle(lastWidth);
@@ -20,16 +21,23 @@ namespace roofing_solution
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
+            width *= 40 * scale;
+
+            //while (width > 400)
+            //{
+            //    scale -= 0.1f;
+            //    width *= scale;
+            //}
+
             if (canvas == null || forCount == null || forCount.Count == 0)
                 return;
 
             canvas.StrokeColor = Colors.Black;
             canvas.StrokeSize = 2;
 
-            width *= 40;
-            height *= 40;
-            panelWidth *= 40;
-            cutOutWidth *= 40;
+            height *= 40 * scale;
+            panelWidth *= 40 * scale;
+            cutOutWidth *= 40 * scale;
 
             PathF path = new();
                 path.MoveTo(0, height);
@@ -47,13 +55,13 @@ namespace roofing_solution
             }
             canvas.DrawPath(path);
 
-            float followingWidth = lastWidth * 40;
+            float followingWidth = lastWidth * 40 * scale;
             int count = 0;
 
             foreach (double item in forCount)
             {
                 canvas.StrokeDashPattern = [2, 2];
-                float lineHeight = Convert.ToSingle(item) * 40;
+                float lineHeight = Convert.ToSingle(item) * 40 * scale;
                 if (lineHeight == height && count == 0)
                 {
                     count++;
