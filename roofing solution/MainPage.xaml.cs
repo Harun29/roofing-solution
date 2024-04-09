@@ -22,12 +22,21 @@ namespace roofing_solution
         private double area;
         private double st = 1.1;
         private double scale = 1.0;
+        private double si = 0.0;
+        private double roofHeight;
+        private double roofWidth; 
 
         private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             scale = e.NewValue;
             UpdateColumns(firstList, "One");
             UpdateColumns(secondList, "Two");
+            CanvasTwo.HeightRequest = roofHeight * 40 * scale;
+            CanvasOne.HeightRequest = roofHeight * 40 * scale;
+            CanvasTwo.WidthRequest = roofWidth * 40 * scale;
+            CanvasOne.WidthRequest = roofWidth * 40 * scale;
+            DrawOnCanvas(CanvasOne, roofHeight, roofWidth, widthOne, st, firstList, si, scale);
+            DrawOnCanvas(CanvasTwo, roofHeight, roofWidth, widthTwo, st, secondList, si, scale);
         }
 
         private void CheckSelectedPickerItem()
@@ -52,9 +61,9 @@ namespace roofing_solution
             }
         }
 
-        private static void DrawOnCanvas(GraphicsView canvas, double Height, double Width, double LastWidth, double PanelWidth, List<double> List, double cutOutWidth)
+        private static void DrawOnCanvas(GraphicsView canvas, double Height, double Width, double LastWidth, double PanelWidth, List<double> List, double cutOutWidth, double scale)
         {
-            canvas.Drawable = new CustomDrawable(Height, Width, LastWidth, PanelWidth, List, cutOutWidth);
+            canvas.Drawable = new CustomDrawable(Height, Width, LastWidth, PanelWidth, List, cutOutWidth, scale);
         }
 
         private void OnCalculateClicked(object sender, EventArgs e)
@@ -69,7 +78,6 @@ namespace roofing_solution
 
             double sk = double.Parse(firstNumberEntry.Text);
             double vk = double.Parse(secondNumberEntry.Text);
-            double si = 0.0;
             if(roofType == "Ravan vrh")
             {
                 si = double.Parse(thirdNumberEntry.Text);
@@ -92,13 +100,15 @@ namespace roofing_solution
             sirinaZadnjeJedan.Text = $"Širina zadnje: {widthOne}m";
             sirinaZadnjeDva.Text = $"Širina zadnje: {widthTwo}m";
 
-            CanvasTwo.HeightRequest = vk*40;
-            CanvasOne.HeightRequest = vk*40;
-            CanvasTwo.WidthRequest = sk*40;
-            CanvasOne.WidthRequest = sk*40;
+            CanvasTwo.HeightRequest = vk*40*scale;
+            CanvasOne.HeightRequest = vk*40*scale;
+            CanvasTwo.WidthRequest = sk*40*scale;
+            CanvasOne.WidthRequest = sk*40*scale;
 
-            MainPage.DrawOnCanvas(CanvasOne, vk, sk, widthOne, st, firstList, si);
-            MainPage.DrawOnCanvas(CanvasTwo, vk, sk, widthTwo, st, secondList, si);
+            roofHeight = vk;
+            roofWidth = sk;
+            DrawOnCanvas(CanvasOne, roofHeight, roofWidth, widthOne, st, firstList, si, scale);
+            DrawOnCanvas(CanvasTwo, roofHeight, roofWidth, widthTwo, st, secondList, si, scale);
 
             if(double.Parse(lossOne) > double.Parse(lossTwo))
             {
@@ -146,7 +156,7 @@ namespace roofing_solution
             }
             if (roofType == "Ravan vrh")
             {
-                h[0] -= Math.Round(((originalHeigh * si) / (originalWidth - si)), 2);
+                h[0] -= Math.Round((originalHeigh * si) / (originalWidth - si), 2);
                 h[0] = Math.Round(h[0], 2);
                 for (int index = 1; index <= h.Count - 1 ; index++)
                 {

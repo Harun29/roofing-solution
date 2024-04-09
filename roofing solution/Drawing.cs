@@ -9,25 +9,18 @@ using Microsoft.Maui.Controls.Platform.Compatibility;
 
 namespace roofing_solution
 {
-    public class CustomDrawable(double height, double width, double lastWidth, double panelWidth, List<double> forCount, double cutOutWidth) : IDrawable
+    public class CustomDrawable(double height, double width, double lastWidth, double panelWidth, List<double> forCount, double cutOutWidth, double scaleForBigRoofs) : IDrawable
     {
-        private float scale = 1;
         private float height = Convert.ToSingle(height);
         private float width = Convert.ToSingle(width);
         private readonly float lastWidth = Convert.ToSingle(lastWidth);
         private float panelWidth = Convert.ToSingle(panelWidth);
         private float cutOutWidth = Convert.ToSingle(cutOutWidth);
         private readonly List<double> forCount = forCount;
+        private readonly float scale = Convert.ToSingle(scaleForBigRoofs);
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
-            width *= 40 * scale;
-
-            //while (width > 400)
-            //{
-            //    scale -= 0.1f;
-            //    width *= scale;
-            //}
 
             if (canvas == null || forCount == null || forCount.Count == 0)
                 return;
@@ -35,6 +28,7 @@ namespace roofing_solution
             canvas.StrokeColor = Colors.Black;
             canvas.StrokeSize = 2;
 
+            width *= 40 * scale;
             height *= 40 * scale;
             panelWidth *= 40 * scale;
             cutOutWidth *= 40 * scale;
